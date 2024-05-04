@@ -25,7 +25,7 @@ void APhenomenonObject::Tick(float DeltaTime)
 
 }
 
-void APhenomenonObject::SpawnObject(int ObjectNumber, bool IsNormalStage)
+void APhenomenonObject::SpawnObject(int ObjectNum, bool IsNormalStage)
 {
 
 }

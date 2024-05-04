@@ -29,5 +29,5 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool isNormalState = true;
 
-	void SpawnObject(int ObjectNumber, bool IsNormalStage);
+	void SpawnObject(int ObjectNum, bool IsNormalStage);
 };
