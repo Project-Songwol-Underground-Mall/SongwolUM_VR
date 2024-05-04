@@ -40,6 +40,7 @@ void ATeleportZone::ExecuteTeleport(bool IsFront)
 	if (GameMode)
 	{
 		GameMode->ChangeStage(IsFrontZone);
+		// 여기서 플레이어의 좌표 이동까지 구현하면 될 것 같다.
 	}
 	else
 	{
