@@ -42,7 +42,7 @@ void ASWUMGameModeBase::GetRandomStage(int StageNumber, bool IsCorrectDirection)
 	srand(static_cast<unsigned int>(time(0)));
 	int Result = rand() % 100;
 	
-	if (Result <= Boundary)
+	if (Result <= Boundary || IsNormalStage) // 이전 스테이지가 일반 스테이지거나 추첨 결과가 이상현상 스테이지
 	{
 		while (IsAbnormalOccured[AbnormalNumber])
 		{
@@ -51,7 +51,7 @@ void ASWUMGameModeBase::GetRandomStage(int StageNumber, bool IsCorrectDirection)
 		IsAbnormalOccured[AbnormalNumber] = true;
 		IsNormalStage = false;
  	}
-	else
+	if (Result > Boundary && !IsNormalStage) // 이전 스테이지가 이상현상 스테이지이고 추첨 결과가 일반 스테이지
 	{
 		AbnormalNumber = -1;
 		IsNormalStage = true;

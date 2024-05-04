@@ -23,7 +23,15 @@ void ATeleportZone::BeginPlay()
 void ATeleportZone::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	UPrimitiveComponent* BoxComponent = FindComponentByClass<UPrimitiveComponent>();
+	if (BoxComponent)
+	{
+		BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &ATeleportZone::OnOverlapBegin);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("BoxComponent를 찾을 수 없습니다."));
+	}
 }
 
 void ATeleportZone::ExecuteTeleport(bool IsFront)
@@ -36,6 +44,19 @@ void ATeleportZone::ExecuteTeleport(bool IsFront)
 	else
 	{
 		UE_LOG(LogTemp, Error, TEXT("GameModeBase를 가져오는데 실패했습니다."));
+	}
+}
+
+void ATeleportZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	// Check if the overlapping actor is a pawn
+	APawn* OverlappingPawn = Cast<APawn>(OtherActor);
+	if (OverlappingPawn)
+	{
+		// Get the current location of the pawn
+		FVector CurrentLocation = OverlappingPawn->GetActorLocation();
+		// Print the current location of the pawn
+		UE_LOG(LogTemp, Warning, TEXT("부딪힌 폰(캐릭터)의 현재위치: %s"), *CurrentLocation.ToString());
 	}
 }
 
