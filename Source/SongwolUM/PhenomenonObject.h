@@ -22,7 +22,12 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	bool IsObjectAbnormal[20] = { false };
-	void SpawnObject(int ObjectNumber, bool IsNormalStage);
 
+	UPROPERTY(EditAnywhere)
+	int ObjectNumber;
+
+	UPROPERTY(EditAnywhere)
+	bool isNormalState = true;
+
+	void SpawnObject(int ObjectNumber, bool IsNormalStage);
 };
